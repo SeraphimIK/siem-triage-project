@@ -4,23 +4,29 @@ A small SOC-style triage project: parse authentication and network connection lo
 
 ## Why I built it
 
-I wanted hands-on practice with the core SOC analyst workflow, reading raw logs, writing detection logic instead of just running someone else's tool, and mapping what I find to MITRE ATT&CK, without needing a full Splunk/ELK deployment to get started. This uses self-generated sample log data rather than a real dataset like BOTS v3, since standing up a full SIEM wasn't practical here, but the detection logic and analysis are genuinely my own work, actually run against the data.
+I wanted hands-on practice with the core SOC analyst workflow — reading raw logs, writing detection logic instead of just running someone else's tool, and mapping what I find to MITRE ATT&CK — without needing a full Splunk/ELK deployment to get started. This uses self-generated sample log data rather than a real dataset like BOTS v3, since standing up a full SIEM wasn't practical here, but the detection logic and analysis are genuinely my own work, actually run against the data.
 
 ## What it does
 
-- generate_sample_logs.py / generate_netlog.py - generate the synthetic auth.log and connections.csv sample data used for the exercise
-- siem_triage.py - parses both logs and detects SSH brute-force bursts (T1110.001), a successful login following a brute-force burst (T1078), privilege escalation via sudo (T1548.003), and port scans (T1046)
-- triage_results.json - the actual output produced by running the script against the sample data
-- TRIAGE_REPORT.md - a full incident triage writeup based on the real findings
+- `generate_sample_logs.py` / `generate_netlog.py` — generate the synthetic `auth.log` and `connections.csv` sample data used for the exercise
+- `siem_triage.py` — parses both logs and detects:
+  - SSH brute-force bursts (T1110.001 — Brute Force: Password Guessing)
+  - A successful login immediately following a brute-force burst (T1078 — Valid Accounts)
+  - Privilege escalation via sudo to read sensitive files (T1548.003 — Abuse Elevation Control Mechanism: Sudo and Sudo Caching)
+  - Port scans (T1046 — Network Service Discovery)
+- `triage_results.json` — the actual output produced by running the script against the sample data
+- `TRIAGE_REPORT.md` — a full incident triage writeup based on the real findings, including an incident narrative and remediation recommendations
 
 ## How to run
 
+```bash
 python3 generate_sample_logs.py
 python3 generate_netlog.py
 python3 siem_triage.py
+```
 
 This regenerates the sample data and re-runs detection, printing each finding with its severity, ATT&CK technique ID/name, tactic, and supporting detail.
 
 ## Limitations
 
-This is a learning exercise built on self-generated sample data, not a production SIEM deployment or the real BOTS dataset.
+This is a learning exercise built on self-generated sample data, not a production SIEM deployment or the real BOTS dataset. See the "Limitations" section in `TRIAGE_REPORT.md` for details.

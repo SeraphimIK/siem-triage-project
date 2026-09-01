@@ -1,0 +1,47 @@
+[
+  {
+    "severity": "HIGH",
+    "title": "SSH brute-force burst from 185.220.101.47",
+    "detail": "10 failed password attempts against user 'admin' within 300s, first seen 2026-08-29 05:12:06",
+    "technique_id": "T1110.001",
+    "technique_name": "Brute Force: Password Guessing",
+    "tactic": "Credential Access",
+    "source": "185.220.101.47"
+  },
+  {
+    "severity": "CRITICAL",
+    "title": "Successful login for 'admin' from brute-forced source 185.220.101.47",
+    "detail": "Login accepted at 2026-08-29 05:14:41, 100s after the brute-force burst ended \u2014 strong indicator of a successful compromise.",
+    "technique_id": "T1078",
+    "technique_name": "Valid Accounts",
+    "tactic": "Initial Access / Persistence / Privilege Escalation / Defense Evasion",
+    "source": "185.220.101.47"
+  },
+  {
+    "severity": "HIGH",
+    "title": "Privilege escalation via sudo by 'admin'",
+    "detail": "At 2026-08-29 05:15:26, 'admin' ran as root: /bin/bash",
+    "technique_id": "T1548.003",
+    "technique_name": "Abuse Elevation Control Mechanism: Sudo and Sudo Caching",
+    "tactic": "Privilege Escalation",
+    "source": "admin"
+  },
+  {
+    "severity": "HIGH",
+    "title": "Privilege escalation via sudo by 'admin'",
+    "detail": "At 2026-08-29 05:15:46, 'admin' ran as root: /usr/bin/cat /etc/shadow",
+    "technique_id": "T1548.003",
+    "technique_name": "Abuse Elevation Control Mechanism: Sudo and Sudo Caching",
+    "tactic": "Privilege Escalation",
+    "source": "admin"
+  },
+  {
+    "severity": "MEDIUM",
+    "title": "Port scan detected from 45.33.32.156",
+    "detail": "20 distinct destination ports touched within 120s, first seen 2026-08-29 07:05:00.237000",
+    "technique_id": "T1046",
+    "technique_name": "Network Service Discovery",
+    "tactic": "Discovery",
+    "source": "45.33.32.156"
+  }
+]
